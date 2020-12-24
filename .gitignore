@@ -1,0 +1,5 @@
+*.swp
+.idea
+datasets/imdb_codefest/*
+model_checkpoints/*
+datasets/*

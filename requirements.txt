@@ -1,0 +1,2 @@
+--index-url https://artifactory.healthcareit.net/artifactory/api/pypi/ai-python-release/simple
+requests

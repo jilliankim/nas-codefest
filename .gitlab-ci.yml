@@ -1,0 +1,29 @@
+image: gitlab.healthcareit.net:8443/artificialintelligence/images/awslinux-spark-turing
+
+stages:
+- build
+
+setup_project:
+  stage: build
+  script:
+  - |
+    source /py36/bin/activate
+    set -euo pipefail
+
+    export LC_ALL=en_US.utf-8
+    export LANG=en_US.utf-8
+
+    echo "Updating pip and installing requirements"
+    echo "--"
+    pip install -U pip
+    for f in $(ls requirements*); do
+      echo $f
+      pip install -r $f
+    done
+    echo "-----------------setup------------------------"
+    python setup.py sdist
+    echo "-----------------complete---------------------"
+    aws s3 cp ./dist/nas_codefest-1.0.tar.gz s3://nucleus-chc-dev-datasciences/users/granganathan/codefest/
+  tags:
+  - development
+
